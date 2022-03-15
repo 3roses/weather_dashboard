@@ -8,6 +8,10 @@ h1 {
     padding: 15px 0 15px;
 }
 
+h3{
+    padding: 1.5rem;
+}
+
 #weather_info{
     /* border: 2px solid black; */
     text-align: center;
@@ -30,6 +34,10 @@ h1 {
 
 .button{
     margin: 10px 0px;
+}
+
+.li{
+    margin: .5rem auto
 }
 
 @media screen and (max-width: 880px){
