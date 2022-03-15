@@ -1,0 +1,39 @@
+
+
+h1 {
+    text-align: center;
+    background-color: blue;
+    color: white;
+    height: 100px;
+    padding: 15px 0 15px;
+}
+
+#weather_info{
+    /* border: 2px solid black; */
+    text-align: center;
+}
+
+.outline{
+    outline: 1px solid black;
+}
+
+.divider{
+    height: 2px;
+    background-color: black;
+    margin: 20px 0px;
+}
+
+.form{
+    padding-bottom: 5px;
+    /* margin: 7px 0px; */
+}
+
+.button{
+    margin: 10px 0px;
+}
+
+@media screen and (max-width: 880px){
+    .mediaquery{
+        flex-direction: column;
+    }
+}
