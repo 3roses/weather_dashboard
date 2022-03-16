@@ -37,8 +37,30 @@ h3{
 }
 
 .li{
-    margin: .5rem auto
+    margin: .5rem auto;
 }
+
+.cards{
+    flex-wrap: nowrap;
+}
+
+.cardDiv{
+    margin: 2px;
+}
+
+.cardStyle{
+    width: auto;
+    background-color: aqua;
+    outline: 1px solid black;
+    margin: 4px;
+    border-radius: 3px;
+    /* flex-wrap: nowrap; */
+}
+
+.left{
+    padding: 5px;
+}
+
 
 @media screen and (max-width: 880px){
     .mediaquery{
