@@ -6,18 +6,39 @@ const formInput = document.querySelector('#userCity')
 var formElement = document.querySelector('#cityForm')
 var city;
 var weatherDetails;
-var lat;
-var lon;
 var main = document.getElementById('mainDiv')
+var cards = document.getElementById('cardDiv')
+var searchedCities; 
+var storageData = JSON.parse(localStorage.getItem('searchedCities'))
+
+
+if (!storageData){
+  searchedCities = []
+}
+else{
+  searchedCities = storageData
+}
+
+
+var recent = document.getElementById('recentSearches')
+
+for (i=0; i<searchedCities.length; i++){
+  var recentList = document.createElement('li')
+  recentList.textContent = searchedCities[i]
+  recent.appendChild(recentList)
+}
+
 
 
 // Dynamically creates weather information for current day
+
 function mainWeather (){
 
     var date = moment().format('l')
     console.log (date)
 
-    
+    main.innerHTML = ''              // Removes previous search result
+    cards.innerHTML = ''
 
     var title = document.createElement('h3')
     title.innerHTML = city + " " + date
@@ -28,20 +49,6 @@ function mainWeather (){
     main.appendChild(title)
     main.appendChild(weatherDetails)
 }
-
-
-
-
-
-
-//TODO create cards dynamically
-//moment js variables for each five days in future
-//create one card and test
-//create all five in a for loop
-//read api docs and see how to access future weather
-
-//put this in the fetch function??? probably so
-
 
 
 
@@ -112,7 +119,7 @@ function weatherRequester (queryURL) {
             var dailyWind = data.daily[i].wind_speed
             var dailyHumidity = data.daily[i].humidity
         
-            var cards = document.getElementById('cardDiv')
+            
             var  cardStyle = document.createElement('div') //created each card div
             cardStyle.classList.add('card', 'col', 'cardDiv')
         
@@ -121,21 +128,25 @@ function weatherRequester (queryURL) {
         
             var cardHeader = document.createElement('h5') //creates card header
             cardHeader.textContent = dayCard
+            cardHeader.classList.add('text')
             
             var cardUl = document.createElement('ul')  //card ul
             cardUl.classList.add('left')
         
             var cardWeather1 = document.createElement('li') //card li
             cardWeather1.textContent = `Temp: ${dailyTemp}`
+            cardWeather1.classList.add('text')
 
             var cardWeather2 = document.createElement('li')
             cardWeather2.textContent = `Wind Speed: ${dailyWind} MPH`
+            cardWeather2.classList.add('text')
 
             var cardWeather3 = document.createElement('li')
-            cardWeather3.textContent = `Humidity: ${humidity}%`
+            cardWeather3.textContent = `Humidity: ${dailyHumidity}%`
+            cardWeather3.classList.add('text')
 
-            main.appendChild(cardDiv)
-            cardDiv.appendChild(cardContent)
+            main.appendChild(cards)
+            cards.appendChild(cardContent)
             cardContent.appendChild(cardHeader)
             cardContent.appendChild(cardUl)
             cardUl.appendChild(cardWeather1)
@@ -158,44 +169,21 @@ function weatherRequester (queryURL) {
 formElement.addEventListener('submit', function(event) {
   event.preventDefault();
 
+  
   city = formInput.value;     //now we want to look at the inputs on the form and store those values in a variable
   console.log(city)
   var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;  // concatenate city desired onto the query url string along with apikey
   console.log(queryURL);
+  
   mainWeather()
   weatherRequester(queryURL);   //we need to make the fetch request for the data
+
+  
+  var recentList = document.createElement('li')    // Lists recent searches underneath the input form 
+  recentList.textContent = city
+  recent.appendChild(recentList)
+  
+  searchedCities.push(city);
+  localStorage.setItem('searchedCities', JSON.stringify(searchedCities));     // Saves search to local storage
   
 })
-
-
-// function renderCurrentWeather(currentWeather) {
-//   console.log(currentWeather);
-//   return `
-//   <li>Current Temperature: ${currentWeather.temp}</li>`;
-// }
-
-
-// save city variable to local storage as array
-
-  // get current local storage as array (json parse)
-
-  // unshift push ---whatever method you want for this application-- the data into array
-  // set array as new localstorage (json stringify)
-
-
-//.unshift() most recent city into the array
-//display these cities as buttons in the ul under the input field
-//0 index first
-//put this function in the click of the submit button
-
-
-
-/* 
-addthings(32, 5)
-
-function addThings (x, y) {
-  return x + y;
-  go to global variable and grab values-->
-}
-
-*/
