@@ -172,7 +172,7 @@ formElement.addEventListener('submit', function(event) {
   
   city = formInput.value;     //now we want to look at the inputs on the form and store those values in a variable
   console.log(city)
-  var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;  // concatenate city desired onto the query url string along with apikey
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;  // concatenate city desired onto the query url string along with apikey
   console.log(queryURL);
   
   mainWeather()
