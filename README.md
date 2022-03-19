@@ -9,7 +9,7 @@ displayed underneath the input field.
 
 ## Screenshot
 
-![Screenshot of calendar.](./calendar_screenshot.png)
+![Screenshot of calendar.](./assets/weather_dashboard_pic.png)
 
 
 ## Link to Page
